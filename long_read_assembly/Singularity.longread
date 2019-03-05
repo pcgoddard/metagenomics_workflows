@@ -16,7 +16,7 @@ from: ubuntu:19.04
 
 # this command assumes at least singularity 2.3
 %environment
-    PATH="/usr/local/anaconda/bin:/usr/bin/quickmerge/:/usr/bin/quickmerge/MUMmer3.23:$PATH"
+    PATH="/usr/local/anaconda/bin:/usr/bin/quickmerge/:$PATH" #:/usr/bin/quickmerge/MUMmer3.23
 		PATH="/ont-guppy-cpu/bin/:$PATH"
 %post
     apt-get update
@@ -29,8 +29,8 @@ from: ubuntu:19.04
     apt-get install -y build-essential
 
    #set up basecaller
-   wget https://mirror.oxfordnanoportal.com/software/analysis/ont-guppy-cpu_2.3.1_linux64.tar.gz
-	 tar -zxf ont-guppy-cpu_2.3.1_linux64.tar.gz
+   wget https://mirror.oxfordnanoportal.com/software/analysis/ont-guppy-cpu_2.3.5_linux64.tar.gz
+	 tar -zxf ont-guppy-cpu*.tar.gz
 
 
 	 #set up canu
@@ -55,12 +55,9 @@ from: ubuntu:19.04
     conda install -y -c conda-forge -c bioconda \
        python>3.5 pilon bwa minimap2 bcftools \
        bedtools bedops biopython tabix ncurses \
-       mummer circlator datrie nanoplot
+       datrie nanoplot mummer4 racon
 
-   #removed to speed up setup
-   #nanopolish jellyfish r-vegan r-ggplot2 r-plyr r-factoextra
-
-   conda install -y -c biobuilds samtools
+   conda install -y -c biobuilds samtools openssl=1.0
 
 
    # tombo for methylation
